@@ -23,7 +23,7 @@ namespace AAE2023_P22083_M3
             SQLiteFunction.RegisterFunction(typeof(LevenshteinDistanceExtension.LevenshteinDistanceFunction));
 
         }
-        
+
 
         private async void buttonFindAll_Click(object sender, EventArgs e)
         {
@@ -41,7 +41,10 @@ namespace AAE2023_P22083_M3
                     SQLiteDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        checkedListBox1.Items.Add(reader["Title"]);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            checkedListBox1.Items.Add(reader["Title"]);
+                        });
                     }
                 }
             });
@@ -65,7 +68,10 @@ namespace AAE2023_P22083_M3
                     SQLiteDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        checkedListBox1.Items.Add(reader["Title"]);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            checkedListBox1.Items.Add(reader["Title"]);
+                        });
                     }
                 }
             });
@@ -226,7 +232,7 @@ namespace AAE2023_P22083_M3
 
 
         }
-    
+
 
         private async void buttonSearchByTitle_Click(object sender, EventArgs e)
         {
@@ -246,7 +252,10 @@ namespace AAE2023_P22083_M3
                     SQLiteDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        checkedListBox1.Items.Add(reader["Title"]);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            checkedListBox1.Items.Add(reader["Title"]);
+                        });
                     }
                 }
             });
@@ -270,7 +279,10 @@ namespace AAE2023_P22083_M3
                     SQLiteDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        checkedListBox1.Items.Add(reader["Title"]);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            checkedListBox1.Items.Add(reader["Title"]);
+                        });
                     }
                 }
             });
