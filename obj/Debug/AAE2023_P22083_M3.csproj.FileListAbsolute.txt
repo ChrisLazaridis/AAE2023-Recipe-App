@@ -10,7 +10,6 @@ C:\Users\claza\source\repos\AAE2023_P22083_M3\bin\Debug\EntityFramework.xml
 C:\Users\claza\source\repos\AAE2023_P22083_M3\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\claza\source\repos\AAE2023_P22083_M3\bin\Debug\System.Data.SQLite.xml
 C:\Users\claza\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.csproj.AssemblyReference.cache
-C:\Users\claza\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.Form1.resources
 C:\Users\claza\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.Properties.Resources.resources
 C:\Users\claza\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.csproj.GenerateResource.cache
 C:\Users\claza\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.csproj.CoreCompileInputs.cache
@@ -36,3 +35,4 @@ C:\Users\User\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.csproj.
 C:\Users\User\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.csproj.CopyComplete
 C:\Users\User\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.exe
 C:\Users\User\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.pdb
+C:\Users\claza\source\repos\AAE2023_P22083_M3\obj\Debug\AAE2023_P22083_M3.Form1.resources

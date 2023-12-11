@@ -20,33 +20,10 @@ namespace AAE2023_P22083_M3
             _calLowerBound = 0;
             _calUpperBound = 90000;
             checkedListBox1.CheckOnClick = false;
+            SQLiteFunction.RegisterFunction(typeof(LevenshteinDistanceExtension.LevenshteinDistanceFunction));
 
         }
-        private static int LevenshteinDistance(string s1, string s2)
-        {
-            // Η χρήση της απόστασης Levenshtein είναι για πιο έγκυρη αναζήτηση με βάση τίτλο, είναι πιο time consuming από ένα SQL select γιατί κάνω process
-            // κάθε τίτλο αλλά μου άρεσε σαν ιδέα και τα SQL functions δεν συνεργάστηκαν εν τέλη οπότε επειδή ήθελα να κάνω την ιδέα μου, πήγα στην υλοποίηση που έχετε μπροστά σας,
-            // δηλαδή με κώδικα μέσα στην εφαρμογή, αν αυτό είναι το τελικό ανέβασμα της εργασίας, πάει να πει ότι η SQLite τελικά δεν συνεργάστηκε, αλλιώς το πλάνο ήταν
-            // μα βάλω τη απόσταση Levenshtein ως συνάρτηση SQL
-            int[,] d = new int[s1.Length + 1, s2.Length + 1];
-
-            for (int i = 0; i <= s1.Length; i++)
-                d[i, 0] = i;
-
-            for (int j = 0; j <= s2.Length; j++)
-                d[0, j] = j;
-
-            for (int i = 1; i <= s1.Length; i++)
-            {
-                for (int j = 1; j <= s2.Length; j++)
-                {
-                    int cost = (s1[i - 1] == s2[j - 1]) ? 0 : 1;
-                    d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
-                }
-            }
-
-            return d[s1.Length, s2.Length];
-        }
+        
 
         private async void buttonFindAll_Click(object sender, EventArgs e)
         {
@@ -262,24 +239,14 @@ namespace AAE2023_P22083_M3
                 using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
                 {
                     conn.Open();
-                    const string selectSql = "SELECT Title FROM Recipes";
+                    const string selectSql = "SELECT Title FROM Recipes WHERE LevenshteinDistance(@Title, LOWER(Title)) <= 6";
+
                     SQLiteCommand command = new SQLiteCommand(selectSql, conn);
+                    command.Parameters.AddWithValue("@Title", textBoxSearchByTitle.Text.ToLower());
                     SQLiteDataReader reader = command.ExecuteReader();
-
-                    List<string> titles = new List<string>();
-
                     while (reader.Read())
                     {
-                        titles.Add(reader["Title"].ToString());
-                    }
-
-                    string searchTerm = textBoxSearchByTitle.Text.ToUpper();
-
-                    var filteredTitles = titles.Where(title => LevenshteinDistance(title.ToUpper(), searchTerm) <= 6);
-
-                    foreach (var title in filteredTitles)
-                    {
-                        checkedListBox1.Items.Add(title);
+                        checkedListBox1.Items.Add(reader["Title"]);
                     }
                 }
             });
