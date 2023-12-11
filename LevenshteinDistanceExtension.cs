@@ -10,7 +10,7 @@ namespace AAE2023_P22083_M3
             public override object Invoke(object[] args)
             {
                 if (args.Length != 2)
-                    throw new ArgumentException("LevenshteinDistance takes exactly 2 arguments");
+                    throw new ArgumentException("Η απόσταση Levenshtein απαιτεί δύο και μόνο 2 ορίσματα.");
 
                 string s1 = Convert.ToString(args[0]);
                 string s2 = Convert.ToString(args[1]);
