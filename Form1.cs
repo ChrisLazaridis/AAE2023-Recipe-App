@@ -17,8 +17,6 @@ namespace AAE2023_P22083_M3
         public Form1()
         {
             InitializeComponent();
-            _calLowerBound = 0;
-            _calUpperBound = 90000;
             checkedListBox1.CheckOnClick = false;
             SQLiteFunction.RegisterFunction(typeof(LevenshteinDistanceExtension.LevenshteinDistanceFunction));
 
@@ -55,6 +53,15 @@ namespace AAE2023_P22083_M3
             checkedListBox1.Items.Clear();
             checkedListBox1.Visible = true;
             checkedListBox1.Enabled = true;
+            if (textBoxCaloriesLowerBound.Text == "" || !int.TryParse(textBoxCaloriesLowerBound.Text, out _calLowerBound))
+            {
+                _calLowerBound = 0;
+            }
+
+            if (textBoxCaloriesUpperBound.Text == "" || !int.TryParse(textBoxCaloriesUpperBound.Text, out _calUpperBound))
+            {
+                _calUpperBound = 90000;
+            }
 
             await Task.Run(() =>
             {
@@ -248,7 +255,9 @@ namespace AAE2023_P22083_M3
                     const string selectSql = "SELECT Title FROM Recipes WHERE LevenshteinDistance(@Title, LOWER(Title)) <= 6";
 
                     SQLiteCommand command = new SQLiteCommand(selectSql, conn);
-                    command.Parameters.AddWithValue("@Title", textBoxSearchByTitle.Text.ToLower());
+                    this.Invoke((MethodInvoker)delegate{
+                        command.Parameters.AddWithValue("@Title", textBoxSearchByTitle.Text.ToLower());
+                    });
                     SQLiteDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -275,7 +284,10 @@ namespace AAE2023_P22083_M3
                     conn.Open();
                     const string selectSql = "SELECT Title FROM Recipes WHERE Category = @Category";
                     SQLiteCommand command = new SQLiteCommand(selectSql, conn);
-                    command.Parameters.AddWithValue("@Category", comboBoxSearchByCategory.Text);
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        command.Parameters.AddWithValue("@Category", comboBoxSearchByCategory.Text);
+                    });
                     SQLiteDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
