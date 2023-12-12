@@ -4,7 +4,7 @@ namespace AAE2023_P22083_M3
 {
     public static class LevenshteinDistanceExtension
     {
-        [SQLiteFunction(FuncType = FunctionType.Scalar, Name = "LevenshteinDistance")]
+        [SQLiteFunction(FuncType = FunctionType.Scalar,Arguments = 2, Name = "LevenshteinDistance")]
         public class LevenshteinDistanceFunction : SQLiteFunction
         {
             public override object Invoke(object[] args)
