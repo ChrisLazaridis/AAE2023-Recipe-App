@@ -324,7 +324,7 @@ namespace AAE2023_P22083_M3
                                                  "Photo = @Photo " +
                                                  "WHERE Title = @Title";
                         SQLiteCommand updateCommand = new SQLiteCommand(updateSql, _connection);
-                        updateCommand.Parameters.AddWithValue("@Title", textBoxTitle.Text.ToUpper());
+                        updateCommand.Parameters.AddWithValue("@Title", textBoxTitle.Text);
                         updateCommand.Parameters.AddWithValue("@Ingredients", richTextBoxIngredients.Text);
                         updateCommand.Parameters.AddWithValue("@Description", richTextBoxDescription.Text);
                         updateCommand.Parameters.AddWithValue("@Portions", _portions);
